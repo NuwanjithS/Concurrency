@@ -6,7 +6,15 @@ public class Bank {
 
     public Bank() {
         accounts = new HashMap<>();
+        for (BankAccount account : initialAccounts) {
+            accounts.put(account.getAccountNumber(), account);
+        }
     }
+        // Create initial bank accounts directly within the class
+    private static final BankAccount[] initialAccounts = {
+        new BankAccount(12345, "Alice", 1000.0),
+        new BankAccount(54321, "Bob", 500.0)
+    };
 
     public synchronized void addAccount(BankAccount account) {
         accounts.put(account.getAccountNumber(), account);

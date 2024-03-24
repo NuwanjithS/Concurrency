@@ -3,11 +3,15 @@ public class BankAccount {
     private int accountNumber;
     private String accountHolderName;
     private double balance = 0.0; // Initially set balance to 0
+    
 
-    public BankAccount(int accountNumber, String accountHolderName) {
+    // Constructor for creating new accounts
+    public BankAccount(int accountNumber, String accountHolderName, double initialBalance) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
     }
+    
 
     public synchronized void deposit(double amount) {
         if (amount > 0) {
