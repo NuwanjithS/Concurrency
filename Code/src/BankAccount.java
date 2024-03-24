@@ -2,12 +2,11 @@ public class BankAccount {
 
     private int accountNumber;
     private String accountHolderName;
-    private double balance;
+    private double balance = 0.0; // Initially set balance to 0
 
     public BankAccount(int accountNumber, String accountHolderName) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
-        this.balance = 0.0; // Initial balance
     }
 
     public synchronized void deposit(double amount) {

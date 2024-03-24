@@ -16,21 +16,53 @@ public class Bank {
         return accounts.get(accountNumber);
     }
 
-    public boolean deposit(int accountNumber, double amount) {
-        boolean depositSuccessful = false; // Initialize to false
-        if (depositSuccessful) {
-            return true; // Deposit successful
-          } else {
-            return false; // Deposit failed
-          }
+    public synchronized boolean deposit(int accountNumber, double amount) {
+      // Implement logic to check if account exists (use getAccount)
+      BankAccount account = getAccount(accountNumber);
+      if (account != null) {
+          account.deposit(amount); // Delegate to the BankAccount for actual deposit logic
+          return true;
+      } else {
+          return false; // Account not found
+      }
+  }
+
+  public synchronized boolean withdraw(int accountNumber, double amount) {
+    // Existing logic for account existence and balance check
+    BankAccount account = getAccount(accountNumber);
+    if (account != null && hasSufficientBalance(accountNumber, amount)) {
+        account.withdraw(amount); // Delegate to the BankAccount for actual withdrawal logic
+        return true;
+    } else {
+        return false;
+    }
+}
+
+      
+private synchronized boolean accountExists(int accountNumber) {
+  return getAccount(accountNumber) != null; // Check if getAccount returns a valid account
+}
+      
+      private synchronized boolean hasSufficientBalance(int accountNumber, double amount) {
+        BankAccount account = getAccount(accountNumber);
+        if (account != null) {
+            return account.getBalance() >= amount; // Check if balance is sufficient
+        } else {
+            return false; // Account not found
+        }
+    }
+      
+      private void debitBalance(int accountNumber, double amount) {
+        // Implement logic to debit the account balance
       }
 
-      public boolean withdraw(int accountNumber, double amount) {
-        // Implement the logic for withdrawing the amount from the specified account
-        // For example, you might fetch the account, check if there are sufficient funds,
-        // deduct the amount from the balance, and return true if successful.
-        // ...
-      }
+      public synchronized double getBalance(int accountNumber) {
+        BankAccount account = accounts.get(accountNumber);
+        if (account == null) {
+            return 0.0; // Account doesn't exist
+        }
+        return account.getBalance(); // Return the current balance considering deposits
+    }
       
 
 }
