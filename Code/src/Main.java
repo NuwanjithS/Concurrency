@@ -33,6 +33,7 @@ public class Main {
                         executor.submit(() -> {
                             bank.deposit(accountNumber, depositAmount);
                             System.out.println("Deposit successful!");
+                            System.out.println("\nDo you want to exit? (y/n)");
                         });
                         break;
                     case 2:
@@ -41,6 +42,7 @@ public class Main {
                         executor.submit(() -> {
                             bank.withdraw(accountNumber, withdrawalAmount);
                             System.out.println("Withdrawal successful!");
+                            System.out.println("\nDo you want to exit? (y/n)");
                         });
                         break;
                     case 3:
@@ -48,6 +50,7 @@ public class Main {
                         executor.submit(() -> {
                             double balance = bank.getBalance(accountNumber);
                             System.out.println("Your current balance: " + balance);
+                            System.out.println("\nDo you want to exit? (y/n)");
                         });
                         break;
                     case 4: // Exit option
@@ -59,7 +62,7 @@ public class Main {
                 }
 
                 // **Display menu and prompt for exit after each case**
-                System.out.println("\nDo you want to exit? (y/n)");
+                
                 String exitChoice = scanner.next();
 
                 if (exitChoice.equalsIgnoreCase("y")) {
